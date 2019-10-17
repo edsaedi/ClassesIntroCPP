@@ -1,8 +1,10 @@
 #include "List.h"
+#include "Source.h"
 
-int main()
+//(int* argc, char** argv)
+int main(int argc, char argv[])
 {
-	//List<int> list;
-
+	List<int> list;
+	list.Add(5);
 	return 0;
 }

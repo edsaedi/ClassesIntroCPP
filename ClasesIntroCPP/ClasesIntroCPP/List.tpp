@@ -3,7 +3,7 @@ template<class T>
 List<T>::List()
 {
 	capacity = 10;
-	array = array[capacity];
+	array = new T[capacity];
 	count = 0;
 }
 
@@ -16,26 +16,22 @@ List<T>::~List()
 template<class T>
 void List<T>::Add(T value)
 {
-	int tempSize = capacity;
-	if (count >= tempSize)
-	{
-		tempSize * 2;
-	}
-	T temp[] = temp[tempSize * 2];
 
-	for (int i = 0; i < 5; i++)
+	if (count >= capacity)
+	{
+		capacity * 2;
+	}
+	// T array    =     element that is size * 2
+	T* temp = new T[capacity * 2];
+
+	for (int i = 0; i < count; i++)
 	{
 		temp[i] = array[i];
 	}
-
+	temp[count] = value;
+	delete[] array;
 	array = temp;
 	count++;
-}
-
-template<class T>
-bool List<T>::Remove(T value)
-{
-	return Remove(Find(value));
 }
 
 template<class T>
@@ -60,6 +56,32 @@ bool List<T>::Remove(int index)
 
 	count--;
 	return true;
+}
+
+template<class T>
+T List<T>::Search(int index)
+{
+	return array[index];
+}
+
+template<class T>
+void List<T>::Sort()
+{
+	bool finished = false;
+	int index = 0;
+	while (!finished)
+	{
+		for (int i = 0; i < count - 1; i++)
+		{
+			if (array[i] > array[i + 1])
+			{
+				auto temp = array[i + 1];
+				array[i + 1] = array[i];
+				array[i] = temp;
+			}
+		}
+		index++;
+	}
 }
 
 template<class T>
